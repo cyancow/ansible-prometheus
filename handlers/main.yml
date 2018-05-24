@@ -1,8 +1,6 @@
 ---
 # file: handlers/main.yml
-#
 
----
 - name: restart prometheus
   become: true
   systemd:
