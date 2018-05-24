@@ -1,0 +1,30 @@
+---
+# file: tasks/install-prometheus.yml
+#
+# Install Prometheus server.
+#
+# @see http://prometheus.io/docs/introduction/getting_started/
+#
+
+- block:
+  
+    - name: set yum repo for prometheus
+      rpm_key:
+        key: https://packagecloud.io/prometheus-rpm/release/gpgkey
+
+    - name: Add yum repo for prometheus
+      yum:
+        name: Prometheus
+        description: Prometheus repo
+        baseurl: https://packagecloud.io/prometheus-rpm/release/el/7/$basearch
+        gpgcheck: yes
+        gpgkey: https://packagecloud.io/prometheus-rpm/release/gpgkey
+        enabled: yes
+        state: present
+    - name: Install Prometheus
+      yum:
+        pkg: prometheus2
+        state: present
+
+  when: prometheus_version == "package"
+
