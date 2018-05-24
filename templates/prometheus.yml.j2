@@ -1,3 +1,3 @@
 #jinja2: lstrip_blocks: "True (or False)", trim_blocks: "True (or False)"
 
-{{ prometheus_config | to_nice_yaml(indent=2) }}
+{{ prometheus_default_config | combine(prometheus_config) | to_nice_yaml(indent=2) }}
